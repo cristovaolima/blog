@@ -87,25 +87,20 @@ export default class Posts {
             if(!response.ok){
                 return this._errorResponse(
                     response.status, 
-                    'Ocorreu um erro ao apagar o produto.'
+                    'Ocorreu um erro ao apagar o post.'
                     );
             }
-            return {status: false, message: 'Produto apagado com sucesso!'};
+            return {status: false, message: 'Post apagado com sucesso!'};
         }catch(error) {
             return this._errorResponse();
         }
     }
 
-    async show(id, token){
-        const url = endpoints.products.show + '/' + id;
+    async show(id){
+        const url = endpoints.post.show + '/' + id;
 
         const httpConfig = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            method: 'GET'
         }
         try{
             const response = await fetch(url, httpConfig);
@@ -114,7 +109,7 @@ export default class Posts {
             if(!response.ok){
                 return this._errorResponse(
                     response.status, 
-                    'Ocorreu um erro ao consultar o produto.'
+                    'Ocorreu um erro ao consultar o post.'
                     );
             }
             return responseJson;
@@ -123,16 +118,11 @@ export default class Posts {
         }
     }
 
-    async list(token){
-        const url = endpoints.post
+    async list(){
+        const url = endpoints.post.list;
 
         const httpConfig = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
+            method: 'GET'
         }
         try{
             const response = await fetch(url, httpConfig);
@@ -141,34 +131,7 @@ export default class Posts {
             if (!response.ok) {
                 return this._errorResponse(
                     response.status,
-                    'Ocorreu um erro ao consultar os produtos.'
-                );
-            }
-            return responseJson;
-        }catch(error) {
-            return this._errorResponse();
-        }
-    }
-
-    async listCompany(id, token){
-        const url = endpoints.products.listcompany + '/' + id;
-
-        const httpConfig = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        }
-        try{
-            const response = await fetch(url, httpConfig);
-            const responseJson = await response.json();
-
-            if (!response.ok) {
-                return this._errorResponse(
-                    response.status,
-                    'Ocorreu um erro ao consultar os produtos da empresa.'
+                    'Ocorreu um erro ao consultar os posts.'
                 );
             }
             return responseJson;
