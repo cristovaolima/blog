@@ -7,3 +7,10 @@
 body{
   font-family: sans-serif;
 }
+
+a:link { text-decoration: none; }
+
+.MuiCard-root {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
