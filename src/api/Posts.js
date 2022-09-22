@@ -44,7 +44,7 @@ export default class Posts {
     }
 
     async update(title, body, userId, id) {
-        const url = endpoints.post.update + '/' + id;
+        const url = `${endpoints.post.update}/${id}`;
         const payload = {
             'id': id,
             'title': title,
@@ -77,7 +77,7 @@ export default class Posts {
     }
 
     async delete(id) {
-        const url = endpoints.post.delete + '/' + id;
+        const url = `${endpoints.post.delete}/${id}`;
         const httpConfig = {
             method: 'DELETE'          
         };
@@ -97,7 +97,7 @@ export default class Posts {
     }
 
     async show(id){
-        const url = endpoints.post.show + '/' + id;
+        const url = `${endpoints.post.show}/${id}`;
 
         const httpConfig = {
             method: 'GET'
@@ -120,6 +120,50 @@ export default class Posts {
 
     async list(){
         const url = endpoints.post.list;
+
+        const httpConfig = {
+            method: 'GET'
+        }
+        try{
+            const response = await fetch(url, httpConfig);
+            const responseJson = await response.json();
+
+            if (!response.ok) {
+                return this._errorResponse(
+                    response.status,
+                    'Ocorreu um erro ao consultar os posts.'
+                );
+            }
+            return responseJson;
+        }catch(error) {
+            return this._errorResponse();
+        }
+    }
+
+    async showUser(id){
+        const url = `${endpoints.post.userPost}/${id}`;
+
+        const httpConfig = {
+            method: 'GET'
+        }
+        try{
+            const response = await fetch(url, httpConfig);
+            const responseJson = await response.json();
+
+            if(!response.ok){
+                return this._errorResponse(
+                    response.status, 
+                    'Ocorreu um erro ao consultar o usuário post.'
+                    );
+            }
+            return responseJson;
+        }catch(error) {
+            return this._errorResponse();
+        }
+    }
+
+    async listPostsUser(idUser){
+        const url = `${endpoints.post.userPost}/${idUser}/posts`;
 
         const httpConfig = {
             method: 'GET'

@@ -8,5 +8,6 @@ export const endpoints = {
         show: `${BASE_URL}/posts`,
         delete: `${BASE_URL}/posts`,
         comments: `${BASE_URL}/comments`,
+        userPost: `${BASE_URL}/users`,
     }
 }
