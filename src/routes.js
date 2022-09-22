@@ -10,6 +10,7 @@ export default function RoutesApp() {
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/create" element={<Create/>}/>
+                <Route exact path="/edit/:id" element={<Create/>}/>
                 <Route exact path="/post/:id" element={<Post/>}/>
             </Routes>            
         </Router>
