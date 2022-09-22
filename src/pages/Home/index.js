@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ApiService } from '../../api';
 import * as M from '@mui/material';
 
-const PAGE = 2;
+const PAGE = 5;
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -23,16 +23,20 @@ export default function Home() {
       alert(responseJson.message);            
       return;
     }else{
-      setInitialPosts(responseJson);
-      setPosts(responseJson.slice(0,prepage));
+      var _posts = responseJson;
+      _posts.reverse();
+      setInitialPosts(_posts);
+      setPosts(_posts.slice(0,prepage));
       setLoad(false);
       return;
     }
   }
   
   async function loadMore(){
+    var _page = prepage + PAGE;
+    var morePosts = initialPosts.slice(prepage, _page);
     setPrepage(prepage + PAGE);
-    setPosts([...posts, initialPosts.slice(prepage, prepage + PAGE)])
+    setPosts([...posts, ...morePosts]);
   }
 
   return (
@@ -44,7 +48,7 @@ export default function Home() {
           </M.Typography>
           <M.Grid item xs={12} sm={12}>
             {load ? (
-              <M.Box sx={{ display: 'flex' }} align="center"> 
+              <M.Box xs={12} align="center"> 
                 <M.CircularProgress />
               </M.Box>) :
                 posts.map(post => (
@@ -59,20 +63,21 @@ export default function Home() {
                     </M.CardContent>
                     <M.Link href={'/post/' + post.id}>
                       <M.CardActions>
-                        <M.Button size="small">Leia mais >></M.Button>
+                        <M.Button size="large">Leia mais >></M.Button>
                       </M.CardActions>
                     </M.Link>                
                   </M.Card>
             ))}            
           </M.Grid>
           <M.Stack spacing={20} align="center">
-            <M.Button 
+            <M.Button
               variant="contained" 
               onClick={loadMore}
-              disabled={load}>
+              disabled={load || posts.length == initialPosts.length}>
                 Carregar mais
             </M.Button>
           </M.Stack>
+          <M.Card variant="outlined"></M.Card>
         </M.Container>
       </M.Box>
     </main>
