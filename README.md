@@ -1,6 +1,6 @@
 # Desafio técnico front-end React Js
 
-O desafio consiste na criação de um front-end utilizando Javascript, React, Styled Components e/ou Material UI e que consuma a API pública https://jsonplaceholder.typicode.com. Desafio técnico seguindo os requsitos funcionais descritos a seguir.
+O desafio consiste na criação de um front-end utilizando Javascript, React, Styled Components e/ou Material UI e que consuma a API pública https://jsonplaceholder.typicode.com. Desafio técnico seguindo os requisitos funcionais descritos a seguir.
 
 **Requisitos funcionais**
 * Realizar a listagem de posts;
